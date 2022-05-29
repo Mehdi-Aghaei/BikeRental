@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BikeRental.Core.Brokers.Storages;
 
-public partial class StorageBroker : DbContext,IStorageBroker
+public partial class StorageBroker : DbContext, IStorageBroker
 {
     private readonly IConfiguration configuration;
 
@@ -25,7 +20,7 @@ public partial class StorageBroker : DbContext,IStorageBroker
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string connectionString = this.configuration
-            .GetConnectionString(name:"DefaultConnection");
+            .GetConnectionString(name: "DefaultConnection");
 
         optionsBuilder.UseSqlServer(connectionString);
     }

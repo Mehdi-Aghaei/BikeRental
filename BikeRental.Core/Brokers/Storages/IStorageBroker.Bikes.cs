@@ -7,5 +7,5 @@ public partial interface IStorageBroker
     IQueryable<Bike> SelectAllBikes();
     ValueTask<Bike> SelectBikeByIdAsync(int bikeId);
     ValueTask<Bike> UpdateBikeAsync(Bike bike);
-    ValueTask<Bike> DeleteBikeAsync(Bike bike); 
+    ValueTask<Bike> DeleteBikeAsync(Bike bike);
 }

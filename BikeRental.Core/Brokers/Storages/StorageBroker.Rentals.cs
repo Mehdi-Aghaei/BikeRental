@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeRental.Core.Models.Rentals;
+﻿using BikeRental.Core.Models.Rentals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -67,4 +62,4 @@ public partial class StorageBroker
         return rentalEntityEntry.Entity;
     }
 }
-    
+

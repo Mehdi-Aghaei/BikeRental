@@ -24,10 +24,10 @@ public partial class StorageBroker
     {
         using var broker =
             new StorageBroker(this.configuration);
-        
+
         return broker.Bikes;
     }
-    
+
     public async ValueTask<Bike> SelectBikeByIdAsync(int bikeId)
     {
         using var broker =

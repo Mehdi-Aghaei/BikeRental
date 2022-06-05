@@ -40,4 +40,4 @@ public partial class BikeServiceTests
         this.loggingBrokerMock.VerifyNoOtherCalls();
     }
 }
-    
+

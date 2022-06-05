@@ -14,8 +14,6 @@ public class BikeService : IBikeService
         this.loggingBroker = loggingBroker;
     }
 
-    public ValueTask<Bike> AddBikeAsync(Bike bike)
-    {
-        throw new NotImplementedException();
-    }
+    public async ValueTask<Bike> AddBikeAsync(Bike bike) =>
+        await this.storageBroker.InsertBikeAsync(bike);
 }

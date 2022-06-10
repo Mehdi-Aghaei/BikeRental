@@ -1,9 +1,11 @@
-﻿using BikeRental.Core.Brokers.Loggings;
+﻿using System.Linq.Expressions;
+using BikeRental.Core.Brokers.Loggings;
 using BikeRental.Core.Brokers.Storages;
 using BikeRental.Core.Models.Bikes;
 using BikeRental.Core.Services.Foundations.Bikes;
 using Moq;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace BikeRental.Core.Tests.Unit.Services.Foundations.Bikes;
 public partial class BikeServiceTests
@@ -20,6 +22,10 @@ public partial class BikeServiceTests
             this.storageBrokerMock.Object, 
             this.loggingBrokerMock.Object);
     }
+
+    private static Expression<Func<Xeption,bool>>  SameExceptionAs(Xeption expectedException) =>
+        actucalException => actucalException.SameExceptionAs(expectedException);
+    
 
     private static DateTimeOffset GetRandomDateTimeOffset() =>
         new DateTimeRange(earliestDate: new DateTime()).GetValue();

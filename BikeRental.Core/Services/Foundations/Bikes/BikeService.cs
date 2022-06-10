@@ -14,6 +14,11 @@ public partial class BikeService : IBikeService
         this.loggingBroker = loggingBroker;
     }
 
-    public async ValueTask<Bike> AddBikeAsync(Bike bike) =>
-        await this.storageBroker.InsertBikeAsync(bike);
+    public ValueTask<Bike> AddBikeAsync(Bike bike) =>
+    TryCatch(async () =>
+    {
+        ValidateBikeIsNotNull(bike);
+
+        return await this.storageBroker.InsertBikeAsync(bike);
+    });
 }

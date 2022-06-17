@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeRental.Core.Models.Customers;
-using BikeRental.Core.Models.Rentals;
+﻿using BikeRental.Core.Models.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -15,14 +9,14 @@ public partial class StorageBroker
 
     public async ValueTask<Customer> InsertCustomerAsync(Customer customer)
     {
-        using var broker = 
+        using var broker =
             new StorageBroker(this.configuration);
-        
-        EntityEntry<Customer> customerEntityEntry = 
+
+        EntityEntry<Customer> customerEntityEntry =
             await broker.Customers.AddAsync(customer);
-        
+
         await broker.SaveChangesAsync();
-        
+
         return customerEntityEntry.Entity;
     }
 
@@ -36,7 +30,7 @@ public partial class StorageBroker
 
     public async ValueTask<Customer> SelectCustomerByIdAsync(int CustomerId)
     {
-        using var broker = 
+        using var broker =
             new StorageBroker(this.configuration);
 
         return await broker.Customers.FindAsync(CustomerId);
@@ -57,7 +51,7 @@ public partial class StorageBroker
 
     public async ValueTask<Customer> DeleteCustomerAsync(Customer customer)
     {
-        using var broker = 
+        using var broker =
             new StorageBroker(this.configuration);
 
         EntityEntry<Customer> customerEntityEntry =
@@ -68,4 +62,4 @@ public partial class StorageBroker
         return customerEntityEntry.Entity;
     }
 }
-    
+

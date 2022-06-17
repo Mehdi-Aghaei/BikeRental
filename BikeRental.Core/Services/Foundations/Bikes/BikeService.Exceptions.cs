@@ -1,6 +1,4 @@
-﻿using BikeRental.Core.Brokers.Loggings;
-using BikeRental.Core.Brokers.Storages;
-using BikeRental.Core.Models.Bikes;
+﻿using BikeRental.Core.Models.Bikes;
 using BikeRental.Core.Models.Bikes.Exceptions;
 using Xeptions;
 
@@ -21,7 +19,7 @@ public partial class BikeService
 
             throw CreateAndLogValidationException(nullBikeException);
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             var failedBikeServiceException =
                 new FailedBikeServiceException(exception);
@@ -32,14 +30,14 @@ public partial class BikeService
 
     private BikeValidationException CreateAndLogValidationException(Xeption exception)
     {
-        var bikeValidationException = 
+        var bikeValidationException =
             new BikeValidationException(exception);
 
         this.loggingBroker.LogError(bikeValidationException);
 
         return bikeValidationException;
     }
-    
+
     private BikeServiceException CreateAndLogServiceException(Xeption exception)
     {
         var bikeServiceException =

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeRental.Core.Models.Bikes;
+﻿using BikeRental.Core.Models.Bikes;
 using FluentAssertions;
 using Force.DeepCloner;
 using Moq;

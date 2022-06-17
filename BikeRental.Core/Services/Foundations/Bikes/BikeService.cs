@@ -8,7 +8,7 @@ public partial class BikeService : IBikeService
     private readonly IStorageBroker storageBroker;
     private readonly ILoggingBroker loggingBroker;
 
-    public BikeService(IStorageBroker storageBroker,ILoggingBroker loggingBroker )
+    public BikeService(IStorageBroker storageBroker, ILoggingBroker loggingBroker)
     {
         this.storageBroker = storageBroker;
         this.loggingBroker = loggingBroker;

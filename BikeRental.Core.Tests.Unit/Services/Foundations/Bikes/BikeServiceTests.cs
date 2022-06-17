@@ -13,19 +13,19 @@ public partial class BikeServiceTests
     private readonly Mock<IStorageBroker> storageBrokerMock;
     private readonly Mock<ILoggingBroker> loggingBrokerMock;
     private readonly IBikeService bikeSevice;
-    
+
     public BikeServiceTests()
     {
         this.storageBrokerMock = new Mock<IStorageBroker>();
         this.loggingBrokerMock = new Mock<ILoggingBroker>();
         this.bikeSevice = new BikeService(
-            this.storageBrokerMock.Object, 
+            this.storageBrokerMock.Object,
             this.loggingBrokerMock.Object);
     }
 
-    private static Expression<Func<Xeption,bool>>  SameExceptionAs(Xeption expectedException) =>
+    private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
         actucalException => actucalException.SameExceptionAs(expectedException);
-    
+
 
     private static DateTimeOffset GetRandomDateTimeOffset() =>
         new DateTimeRange(earliestDate: new DateTime()).GetValue();
@@ -36,11 +36,11 @@ public partial class BikeServiceTests
     private static Filler<Bike> CreateBikeFiller(DateTimeOffset date)
     {
         var filler = new Filler<Bike>();
-        
+
         filler.Setup()
             .OnType<DateTimeOffset>()
             .Use(date);
-        
+
         return filler;
     }
 }

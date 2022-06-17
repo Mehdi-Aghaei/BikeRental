@@ -21,6 +21,13 @@ public partial class BikeService
 
             throw CreateAndLogValidationException(nullBikeException);
         }
+        catch(Exception exception)
+        {
+            var failedBikeServiceException =
+                new FailedBikeServiceException(exception);
+
+            throw CreateAndLogServiceException(failedBikeServiceException);
+        }
     }
 
     private BikeValidationException CreateAndLogValidationException(Xeption exception)
@@ -31,5 +38,15 @@ public partial class BikeService
         this.loggingBroker.LogError(bikeValidationException);
 
         return bikeValidationException;
+    }
+    
+    private BikeServiceException CreateAndLogServiceException(Xeption exception)
+    {
+        var bikeServiceException =
+            new BikeServiceException(exception);
+
+        this.loggingBroker.LogError(bikeServiceException);
+
+        return bikeServiceException;
     }
 }

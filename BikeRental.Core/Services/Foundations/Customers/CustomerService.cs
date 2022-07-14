@@ -19,8 +19,8 @@ public class CustomerService : ICustomerService
         this.loggingBroker = loggingBroker;
     }
 
-    public ValueTask<Customer> AddCustomerAsync(Customer customer)
+    public async ValueTask<Customer> AddCustomerAsync(Customer customer)
     {
-        throw new NotImplementedException();
+        return await this.storageBroker.InsertCustomerAsync(customer);
     }
 }

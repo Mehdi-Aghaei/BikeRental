@@ -8,7 +8,7 @@ using BikeRental.Core.Brokers.Storages;
 using BikeRental.Core.Models.Customers;
 
 namespace BikeRental.Core.Services.Foundations.Customers;
-public class CustomerService : ICustomerService
+public partial class CustomerService : ICustomerService
 {
     private readonly IStorageBroker storageBroker;
     private readonly ILoggingBroker loggingBroker;
@@ -19,8 +19,11 @@ public class CustomerService : ICustomerService
         this.loggingBroker = loggingBroker;
     }
 
-    public async ValueTask<Customer> AddCustomerAsync(Customer customer)
+    public ValueTask<Customer> AddCustomerAsync(Customer customer) =>
+    TryCatch(async () =>
     {
+        ValidateCustomerIsNotNull(customer);
+        
         return await this.storageBroker.InsertCustomerAsync(customer);
-    }
+    });
 }

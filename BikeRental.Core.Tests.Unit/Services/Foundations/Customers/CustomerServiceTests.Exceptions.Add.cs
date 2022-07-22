@@ -14,7 +14,7 @@ namespace BikeRental.Core.Tests.Unit.Services.Foundations.Customers;
 public partial class CustomerServiceTests
 {
     [Fact]
-    public async Task ShoukldThrowServiceExceptionOnAddIfServiceErrorOccursAndLogItAsync()
+    public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccursAndLogItAsync()
     {
         // given
         Customer someCustomer = CreateRandomCustomer();

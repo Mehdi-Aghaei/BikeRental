@@ -20,6 +20,13 @@ public partial class CustomerService
 
 			throw CreateAndLogValidationException(nullCustomerException);
 		}
+		catch (Exception exception)
+		{
+			var failedCustomerServiveException =
+				new FailedCustomerServiceException(exception);
+
+			throw CreateAndLogServiceException(failedCustomerServiveException);
+		}
     }
 
 	private CustomerValidationExcetpion CreateAndLogValidationException(Xeption exception)
@@ -30,5 +37,15 @@ public partial class CustomerService
 		this.loggingBroker.LogError(customerValidationException);
 
 		return customerValidationException;
+	}
+    
+	private CustomerServiceException CreateAndLogServiceException(Xeption exception)
+	{
+		var customerServiceException =
+			new CustomerServiceException(exception);
+
+		this.loggingBroker.LogError(customerServiceException);
+
+		return customerServiceException;
 	}
 }

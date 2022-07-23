@@ -1,8 +1,10 @@
 ﻿using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using BikeRental.Core.Brokers.Loggings;
 using BikeRental.Core.Brokers.Storages;
 using BikeRental.Core.Models.Bikes;
 using BikeRental.Core.Services.Foundations.Bikes;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
@@ -41,6 +43,9 @@ public partial class BikeServiceTests
     
     private static int GetRandomNumber() =>
         new IntRange(min:2,max:10).GetValue();
+
+    private static SqlException GetSqlException() =>
+          (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
 
     private static Filler<Bike> CreateBikeFiller(DateTimeOffset date)
     {

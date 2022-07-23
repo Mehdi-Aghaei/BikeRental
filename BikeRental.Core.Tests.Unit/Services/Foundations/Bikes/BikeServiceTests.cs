@@ -33,6 +33,15 @@ public partial class BikeServiceTests
     private static Bike CreateRandomBike() =>
         CreateBikeFiller(date: GetRandomDateTimeOffset()).Create();
 
+    private static IQueryable<Bike> CreateRandomBikes()
+    {
+        return CreateBikeFiller(date: GetRandomDateTimeOffset())
+            .Create(count: GetRandomNumber()).AsQueryable();
+    }
+    
+    private static int GetRandomNumber() =>
+        new IntRange(min:2,max:10).GetValue();
+
     private static Filler<Bike> CreateBikeFiller(DateTimeOffset date)
     {
         var filler = new Filler<Bike>();

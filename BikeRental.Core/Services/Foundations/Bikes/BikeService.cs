@@ -21,4 +21,9 @@ public partial class BikeService : IBikeService
 
         return await this.storageBroker.InsertBikeAsync(bike);
     });
+    
+    public IQueryable<Bike> RetrieveAllBikes()
+    {
+        throw new NotImplementedException();
+    }
 }

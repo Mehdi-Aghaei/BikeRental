@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using BikeRental.Core.Models.Bikes;
-using BikeRental.Core.Models.Bikes.Exceptions;
+﻿using BikeRental.Core.Models.Bikes.Exceptions;
 using FluentAssertions;
-using Force.DeepCloner;
 using Microsoft.Data.SqlClient;
 using Moq;
 using Xunit;
@@ -27,7 +24,7 @@ public partial class BikeServiceTests
                 .Throws(sqlException);
 
         // when
-        Action retrieveAllBikesAction = () => 
+        Action retrieveAllBikesAction = () =>
             this.bikeSevice.RetrieveAllBikes();
 
         BikeDependencyException actualBikeDependencyException =
@@ -37,7 +34,7 @@ public partial class BikeServiceTests
         actualBikeDependencyException.Should().BeEquivalentTo(expectedBikeDependencyException);
 
         this.storageBrokerMock.Verify(broker =>
-            broker.SelectAllBikes(), 
+            broker.SelectAllBikes(),
                 Times.Once);
 
         this.loggingBrokerMock.Verify(broker =>
@@ -76,12 +73,12 @@ public partial class BikeServiceTests
         actualBikeServiceException.Should().BeEquivalentTo(expectedBikeServiceException);
 
         this.storageBrokerMock.Verify(broker =>
-            broker.SelectAllBikes(), 
+            broker.SelectAllBikes(),
                 Times.Once);
 
         this.loggingBrokerMock.Verify(broker =>
             broker.LogError(It.Is(SameExceptionAs(
-                expectedBikeServiceException))), 
+                expectedBikeServiceException))),
                     Times.Once);
 
         this.storageBrokerMock.VerifyNoOtherCalls();

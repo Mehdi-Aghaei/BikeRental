@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BikeRental.Core.Models.Bikes;
+﻿using BikeRental.Core.Models.Bikes;
 using FluentAssertions;
 using Force.DeepCloner;
 using Moq;

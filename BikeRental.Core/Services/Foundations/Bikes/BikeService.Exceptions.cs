@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BikeRental.Core.Models.Bikes;
+﻿using BikeRental.Core.Models.Bikes;
 using BikeRental.Core.Models.Bikes.Exceptions;
 using Microsoft.Data.SqlClient;
 using Xeptions;
@@ -45,7 +44,13 @@ public partial class BikeService
 
             throw CreateAndLogCriticalDependencyException(failedBikeStorageException);
         }
+        catch (Exception exception)
+        {
+            var failedBikeServiceException =
+                new FailedBikeServiceException(exception);
 
+            throw CreateAndLogServiceException(failedBikeServiceException);
+        }
     }
 
     private BikeValidationException CreateAndLogValidationException(Xeption exception)
@@ -67,7 +72,7 @@ public partial class BikeService
 
         return bikeDependencyException;
     }
-    
+
     private BikeServiceException CreateAndLogServiceException(Xeption exception)
     {
         var bikeServiceException =

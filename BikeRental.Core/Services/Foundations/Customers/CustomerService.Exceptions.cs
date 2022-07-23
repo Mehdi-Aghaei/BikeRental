@@ -7,45 +7,45 @@ namespace BikeRental.Core.Services.Foundations.Customers;
 public partial class CustomerService
 {
     private delegate ValueTask<Customer> ReturningCustomerFunction();
-    
+
     private async ValueTask<Customer> TryCatch(ReturningCustomerFunction returningCustomerFunction)
     {
-		try
-		{
-			return await returningCustomerFunction();
+        try
+        {
+            return await returningCustomerFunction();
 
-		}
-		catch (NullCustomerExcetpion nullCustomerException)
-		{
+        }
+        catch (NullCustomerExcetpion nullCustomerException)
+        {
 
-			throw CreateAndLogValidationException(nullCustomerException);
-		}
-		catch (Exception exception)
-		{
-			var failedCustomerServiveException =
-				new FailedCustomerServiceException(exception);
+            throw CreateAndLogValidationException(nullCustomerException);
+        }
+        catch (Exception exception)
+        {
+            var failedCustomerServiveException =
+                new FailedCustomerServiceException(exception);
 
-			throw CreateAndLogServiceException(failedCustomerServiveException);
-		}
+            throw CreateAndLogServiceException(failedCustomerServiveException);
+        }
     }
 
-	private CustomerValidationExcetpion CreateAndLogValidationException(Xeption exception)
-	{
-		var customerValidationException =
-			new CustomerValidationExcetpion(exception);
+    private CustomerValidationExcetpion CreateAndLogValidationException(Xeption exception)
+    {
+        var customerValidationException =
+            new CustomerValidationExcetpion(exception);
 
-		this.loggingBroker.LogError(customerValidationException);
+        this.loggingBroker.LogError(customerValidationException);
 
-		return customerValidationException;
-	}
-    
-	private CustomerServiceException CreateAndLogServiceException(Xeption exception)
-	{
-		var customerServiceException =
-			new CustomerServiceException(exception);
+        return customerValidationException;
+    }
 
-		this.loggingBroker.LogError(customerServiceException);
+    private CustomerServiceException CreateAndLogServiceException(Xeption exception)
+    {
+        var customerServiceException =
+            new CustomerServiceException(exception);
 
-		return customerServiceException;
-	}
+        this.loggingBroker.LogError(customerServiceException);
+
+        return customerServiceException;
+    }
 }

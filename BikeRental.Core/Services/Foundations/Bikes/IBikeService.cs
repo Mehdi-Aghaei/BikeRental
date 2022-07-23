@@ -4,4 +4,5 @@ namespace BikeRental.Core.Services.Foundations.Bikes;
 public interface IBikeService
 {
     ValueTask<Bike> AddBikeAsync(Bike bike);
+    IQueryable<Bike> RetrieveAllBikes();
 }

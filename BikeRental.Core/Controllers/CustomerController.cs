@@ -8,7 +8,7 @@ namespace BikeRental.Core.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CustomerController: RESTFulController
+public class CustomerController : RESTFulController
 {
     private readonly ICustomerService customerService;
 

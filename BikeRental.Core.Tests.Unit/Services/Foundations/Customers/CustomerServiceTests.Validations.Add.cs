@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeRental.Core.Models.Customers;
+﻿using BikeRental.Core.Models.Customers;
 using BikeRental.Core.Models.Customers.Exceptions;
-using FluentAssertions;
-using Force.DeepCloner;
 using Moq;
 using Xunit;
 
@@ -43,7 +36,7 @@ public partial class CustomerServiceTests
                     Times.Once);
 
         this.storageBrokerMock.Verify(broker =>
-            broker.InsertCustomerAsync(It.IsAny<Customer>()), 
+            broker.InsertCustomerAsync(It.IsAny<Customer>()),
                 Times.Never);
 
         this.loggingBrokerMock.VerifyNoOtherCalls();

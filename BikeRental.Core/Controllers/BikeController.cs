@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeRental.Core.Models.Bikes;
+﻿using BikeRental.Core.Models.Bikes;
 using BikeRental.Core.Models.Bikes.Exceptions;
 using BikeRental.Core.Services.Foundations.Bikes;
 using Microsoft.AspNetCore.Mvc;
@@ -15,28 +10,28 @@ namespace BikeRental.Core.Controllers;
 [Route("[controller]")]
 public class BikeController : RESTFulController
 {
-	private readonly IBikeService bikeService;
+    private readonly IBikeService bikeService;
 
-	public BikeController(IBikeService bikeService)
-	{
-		this.bikeService = bikeService;
-	}
+    public BikeController(IBikeService bikeService)
+    {
+        this.bikeService = bikeService;
+    }
 
     [HttpPost]
     public async ValueTask<ActionResult<Bike>> PostBikeAsync(Bike bike)
     {
-		try
-		{
-			Bike addedBike = 
-				await this.bikeService.AddBikeAsync(bike);
+        try
+        {
+            Bike addedBike =
+                await this.bikeService.AddBikeAsync(bike);
 
-			return Created(bike);
-		}
-		catch (BikeValidationException bikeValidationException)
-		{
+            return Created(bike);
+        }
+        catch (BikeValidationException bikeValidationException)
+        {
 
-			return BadRequest(bikeValidationException.InnerException);
-		}
+            return BadRequest(bikeValidationException.InnerException);
+        }
         catch (BikeServiceException bikeServiceException)
         {
             return InternalServerError(bikeServiceException);

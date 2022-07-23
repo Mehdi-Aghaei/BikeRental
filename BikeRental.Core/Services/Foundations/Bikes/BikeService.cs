@@ -23,5 +23,5 @@ public partial class BikeService : IBikeService
     });
 
     public IQueryable<Bike> RetrieveAllBikes() =>
-        this.storageBroker.SelectAllBikes();
+    TryCatch(() => this.storageBroker.SelectAllBikes());
 }

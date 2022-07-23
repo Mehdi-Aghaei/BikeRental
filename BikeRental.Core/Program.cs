@@ -1,6 +1,7 @@
 using BikeRental.Core.Brokers.Loggings;
 using BikeRental.Core.Brokers.Storages;
 using BikeRental.Core.Services.Foundations.Bikes;
+using BikeRental.Core.Services.Foundations.Customers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddLogging();
 
 RegisterBrokers(builder);
 builder.Services.AddTransient<IBikeService, BikeService>();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -48,5 +48,44 @@ public partial class BikeServiceTests
         this.storageBrokerMock.VerifyNoOtherCalls();
         this.loggingBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Fact]
+    public void ShouldThrowServiceExceptionOnRetrieveAllIfServiceErrorOccursAndLogIt()
+    {
+        // given
+        var exception = new Exception();
+
+        var failedBikeServiceException =
+            new FailedBikeServiceException(exception);
+
+        var expectedBikeServiceException =
+            new BikeServiceException(failedBikeServiceException);
+
+        this.storageBrokerMock.Setup(broker =>
+            broker.SelectAllBikes())
+                .Throws(exception);
+
+        // when
+        Action retrieveAllBikesAction = () =>
+            this.bikeSevice.RetrieveAllBikes();
+
+        BikeServiceException actualBikeServiceException =
+            Assert.Throws<BikeServiceException>(retrieveAllBikesAction);
+
+        // then
+        actualBikeServiceException.Should().BeEquivalentTo(expectedBikeServiceException);
+
+        this.storageBrokerMock.Verify(broker =>
+            broker.SelectAllBikes(), 
+                Times.Once);
+
+        this.loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedBikeServiceException))), 
+                    Times.Once);
+
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+    }
 }
 

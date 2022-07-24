@@ -8,11 +8,11 @@ namespace BikeRental.Core.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CustomerController : RESTFulController
+public class CustomersController : RESTFulController
 {
     private readonly ICustomerService customerService;
 
-    public CustomerController(ICustomerService customerService)
+    public CustomersController(ICustomerService customerService)
     {
         this.customerService = customerService;
     }

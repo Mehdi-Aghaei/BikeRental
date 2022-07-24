@@ -8,11 +8,11 @@ namespace BikeRental.Core.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class BikeController : RESTFulController
+public class BikesController : RESTFulController
 {
     private readonly IBikeService bikeService;
 
-    public BikeController(IBikeService bikeService)
+    public BikesController(IBikeService bikeService)
     {
         this.bikeService = bikeService;
     }
@@ -31,6 +31,26 @@ public class BikeController : RESTFulController
         {
 
             return BadRequest(bikeValidationException.InnerException);
+        }
+        catch (BikeServiceException bikeServiceException)
+        {
+            return InternalServerError(bikeServiceException);
+        }
+    }
+
+    [HttpGet]
+    public ActionResult<IQueryable<Bike>> GetAllBikes()
+    {
+        try
+        {
+            IQueryable<Bike> retrievedBikes =
+                this.bikeService.RetrieveAllBikes();
+
+            return Ok(retrievedBikes);
+        }
+        catch (BikeDependencyException bikeDependencyException)
+        {
+            return InternalServerError(bikeDependencyException);
         }
         catch (BikeServiceException bikeServiceException)
         {

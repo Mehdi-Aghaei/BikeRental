@@ -24,4 +24,6 @@ public partial class StorageBroker : DbContext, IStorageBroker
 
         optionsBuilder.UseSqlServer(connectionString);
     }
+
+    public override void Dispose() { }
 }

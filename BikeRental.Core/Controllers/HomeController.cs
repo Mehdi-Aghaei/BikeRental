@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BikeRental.Core.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class HomeController : ControllerBase
     {
         [HttpGet]

@@ -7,7 +7,7 @@ using RESTFulSense.Controllers;
 namespace BikeRental.Core.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CustomersController : RESTFulController
 {
     private readonly ICustomerService customerService;

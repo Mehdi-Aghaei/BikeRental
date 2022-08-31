@@ -3,6 +3,6 @@ public enum Category
 {
     Standard,
     Mountain,
-    Trecking,
+    Trekking,
     Racing
 }
